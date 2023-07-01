@@ -1,4 +1,4 @@
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 import { fetchBreeds } from './cat-api';
 import { fetchCatByBreed } from './cat-api';
 const breedSelect = document.querySelector('.breed-select');
@@ -24,11 +24,21 @@ fetchBreeds().then(data => {
 
 }).catch(err => console.log(err));
 
+const onClick = evt => {
+    const breedId = evt.target.value;
+    breedSelect.value = ""
+    pLoader.style.display = "block"
+    fetchCatByBreed(breedId)
+        .then(data => createMarkup(data))
+        .catch(err => console.log(err));
+};
+const catById = breedSelect.addEventListener("change", onClick)
+
 
 function createMarkup(data) {
-    const imageEl = data[0].url;
+    const imageUrl = data[0].url;
     const markup = data[0].breeds.map((breed) => {
-        return `<img class="breed-image" alt=${breed.name} src=${imageEl}>
+        return `<img class="breed-image" alt=${breed.name} src=${imageUrl}>
     <div class="breed-container">
     <h2 class="breed-name"> ${breed.name}</h2>
     <p class="breed-temperament"> ${breed.temperament}</p>
@@ -41,11 +51,5 @@ function createMarkup(data) {
 }
 
 
-const onClick = evt => {
-    const breedId = evt.target.value;
-    breedSelect.value = ""
-    pLoader.style.display = "block"
-    fetchCatByBreed(breedId).then(data => createMarkup(data)).catch(err => console.log(err));
-}
-const catById = breedSelect.addEventListener("change", onClick)
+
 
