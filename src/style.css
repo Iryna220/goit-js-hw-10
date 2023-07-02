@@ -57,7 +57,7 @@ body {
   border-radius: 50%;
   display: inline-block;
   position: relative;
-  background: linear-gradient(0deg, rgba(255, 61, 0, 0.2) 33%, #ff3d00 100%);
+  background: linear-gradient(0deg, #ffffff, #ff3d00 100%);
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
 }
@@ -71,7 +71,7 @@ body {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: #263238;
+  background: #aaaaaa;
 }
 .breed-name {
   font-family: 'Manrope', sans-serif;
